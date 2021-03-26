@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:id="@+id/mainpageneedlistview"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:layout_weight="0."
+       android:orientation="horizontal"
+       android:layout_gravity="bottom">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:drawableTop="@drawable/mainpage"
+           android:layout_weight="1"
+           android:background="#ffffff"
+           android:text="首页"
+           android:id="@+id/mainpagemainbutton"
+           />
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:drawableTop="@drawable/add"
+           android:layout_weight="1"
+           android:text="发布"
+           android:background="#ffffff"
+           android:id="@+id/mainpageaddbutton"
+           />
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:drawableTop="@drawable/person"
+           android:layout_weight="1"
+           android:background="#ffffff"
+           android:text="我"
+           android:id="@+id/mainpagepersonbutton"
+           />
+   </LinearLayout>
+
+
+</LinearLayout>

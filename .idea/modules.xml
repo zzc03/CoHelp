@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CoHelp.iml" filepath="$PROJECT_DIR$/CoHelp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CoHelp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CoHelp.app.iml" />
+    </modules>
+  </component>
+</project>

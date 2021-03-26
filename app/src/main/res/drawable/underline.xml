@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#DCDCDC" />
+        </shape>
+    </item>
+    <!-- 主体背景颜色值 -->
+    <item android:bottom="1dp"> <!--设置只有底部有边框-->
+        <shape>
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <item android:top="1dp"> <!--设置只有底部有边框-->
+        <shape>
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <item android:left="1dp"> <!--设置只有底部有边框-->
+        <shape>
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+    <item android:right="1dp"> <!--设置只有底部有边框-->
+        <shape>
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+</selector>

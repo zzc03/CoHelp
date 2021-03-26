@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    tools:showIn="@layout/addtask">
+    <TextView
+        android:id="@+id/tv_home"
+        style="@style/viewpager_navigation_bar_tab_style"
+        android:drawableTop="@drawable/mainpage"
+        android:text="首页"/>
+    <TextView
+        android:id="@+id/tv_addneed"
+        style="@style/viewpager_navigation_bar_tab_style"
+        android:drawableTop="@drawable/add"
+        android:text="发需求"/>
+    <TextView
+        android:id="@+id/tv_person"
+        style="@style/viewpager_navigation_bar_tab_style"
+        android:drawableTop="@drawable/person"
+        android:text="我"/>
+</LinearLayout>
