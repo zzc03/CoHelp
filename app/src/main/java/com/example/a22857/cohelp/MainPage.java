@@ -64,11 +64,8 @@ public class MainPage extends AppCompatActivity {
         personButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog alertDialog1=new AlertDialog.Builder(MainPage.this)
-                        .setTitle("提示")
-                        .setMessage("功能暂未实现")
-                        .create();
-                alertDialog1.show();
+               Intent intent=new Intent(MainPage.this,PersonPage.class);
+               startActivity(intent);
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +73,7 @@ public class MainPage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog alertDialog1=new AlertDialog.Builder(MainPage.this)
                         .setTitle("提示")
-                        .setMessage("功能暂未实现")
+                        .setMessage("你点击的是"+position+"个需求")
                         .create();
                 alertDialog1.show();
             }

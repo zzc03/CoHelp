@@ -32,11 +32,13 @@ public class RegisterPage extends AppCompatActivity {
     private EditText name;
     private EditText password;
     private EditText repassword;
+    private EditText account;
     private Button sure;
     private Button cancal;
     private String nametext;
     private String passwordtext;
     private String repasswordtext;
+    private String accounttext;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +48,29 @@ public class RegisterPage extends AppCompatActivity {
         repassword=(EditText)findViewById(R.id.registerPageRepassword);
         sure=(Button)findViewById(R.id.registerPageSure);
         cancal=(Button)findViewById(R.id.registerPageCancal);
+        account=(EditText)findViewById(R.id.registerPageAccount);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nametext=name.getText().toString();
                 passwordtext=password.getText().toString();
                 repasswordtext=repassword.getText().toString();
-                if(nametext.equals("")||passwordtext.equals("")||repasswordtext.equals(""))
+                accounttext=account.getText().toString();
+                if(accounttext.equals("")||nametext.equals("")||passwordtext.equals("")||repasswordtext.equals(""))
                 {
                     AlertDialog alertDialog1=new AlertDialog.Builder(RegisterPage.this)
                             .setTitle("提示")
                             .setMessage("昵称或者密码不能为空")
                             .create();
                     alertDialog1.show();
+                }
+                else if(accounttext.length()>6 ||accounttext.length()<4)
+                {
+                    AlertDialog alertDialog3=new AlertDialog.Builder(RegisterPage.this)
+                            .setTitle("提示")
+                            .setMessage("账号长度为4-6位")
+                            .create();
+                    alertDialog3.show();
                 }
                 else if(!passwordtext.equals(repasswordtext))
                 {
@@ -95,7 +107,7 @@ public class RegisterPage extends AppCompatActivity {
                             String  result = response.body().string();
                             Log.d("MainActivity",result);
                             User user = JSON.parseObject(result, User.class);
-                            int userid = user.getId();
+                            int userid = user.getUserId();
                             if (response.body()!=null){
                                 response.body().close();
                                 Looper.prepare();

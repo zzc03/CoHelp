@@ -3,14 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="9">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="头像"
+                android:textSize="30sp"/>
+            <ImageView
+                android:id="@+id/personpagehead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/defaulthead"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="70dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/personpagename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="默认昵称"
+                android:textSize="30sp"
+                android:layout_marginLeft="30dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="70dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="积分"
+                android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/personpagemoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10000"
+                android:textSize="30sp"
+                android:layout_marginLeft="30dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="70dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信息"
+                android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/personpagedescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="默认信息"
+                android:textSize="30sp"
+                android:layout_marginLeft="30dp"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/personpagemyneed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的任务"
+            android:textSize="30sp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/personpagemydoingneed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我接受的"
+            android:textSize="30sp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="25dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="退出登录"
+            android:id="@+id/personpagequitbutton"
+            android:textSize="30sp"
+            android:layout_marginTop="25dp"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-
         android:orientation="horizontal"
         android:layout_gravity="bottom">
         <Button
+            android:id="@+id/personpagemain"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/mainpage"
@@ -20,6 +123,7 @@
             />
         <Button
             android:layout_width="wrap_content"
+            android:id="@+id/personpageadd"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/add"
             android:layout_weight="1"
@@ -28,6 +132,7 @@
             />
         <Button
             android:layout_width="wrap_content"
+            android:id="@+id/personpageperson"
             android:layout_height="match_parent"
             android:drawableTop="@drawable/person"
             android:layout_weight="1"
@@ -35,5 +140,4 @@
             android:text="我"
             />
     </LinearLayout>
-
 </LinearLayout>

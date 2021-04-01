@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import Entity.ItemNeed;
+import Entity.User;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -61,30 +63,42 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             HashMap map=new HashMap();
-                            map.put("userId",account.getText().toString());
-                            map.put("password",password.getText().toString());
-
-
-                            String result=inter.doGet("http://10.0.2.2:8080/user/query",map);
-                            if(result.equals("false"))
+                            map.put("account",account.getText().toString());
+                            String result=inter.doGet("http://10.0.2.2:8080/user/querybyaccount",map);
+                            User a= JSON.parseObject(result, User.class);
+                            if(a==null)
                             {
                                 Looper.prepare();
-                                Toast.makeText(MainActivity.this,"账号密码错误",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"该账号不存在",Toast.LENGTH_SHORT).show();
                                 Looper.loop();
 
                             }
                             else
                             {
-                                Looper.prepare();
-                                SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
-                                SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putBoolean("is_login",true);
-                                editor.putString("user_id",account.getText().toString());
-                                editor.commit();
-                                Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(MainActivity.this,MainPage.class);
-                                startActivity(intent);
-                                Looper.loop();
+
+                                if(!a.getPassword().equals(password.getText().toString()))
+                                {
+                                    Looper.prepare();
+                                    Toast.makeText(MainActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                    Looper.loop();
+                                }
+                                else
+                                {
+                                    Looper.prepare();
+                                    Log.d("MainActivity","查询到的user为"+a.toString());
+                                    SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                                    editor.putBoolean("is_login",true);
+                                    editor.putString("user_id",a.getUserId()+"");
+                                    Log.d("MainActivity","提交前的userID"+a.getUserId());
+                                    editor.commit();
+                                    Log.d("MainActivity","提交后的userID"+sharedPreferences.getString("user_id",""));
+                                    Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(MainActivity.this,MainPage.class);
+                                    startActivity(intent);
+                                    Looper.loop();
+                                }
+
 
 
                             }

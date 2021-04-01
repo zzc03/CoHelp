@@ -43,6 +43,7 @@ public class AddNeedPage extends AppCompatActivity{
     private Button submitview;
     private Button mainpageview;
     private Button personview;
+    private Button addbutton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,29 @@ public class AddNeedPage extends AppCompatActivity{
         submitview=(Button)findViewById(R.id.addpagesubmit);
         mainpageview=(Button)findViewById(R.id.addpagemain);
         personview=(Button)findViewById(R.id.addpageperson);
+        addbutton=(Button)findViewById(R.id.addpageadd);
+        mainpageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddNeedPage.this,MainPage.class);
+                startActivity(intent);
+            }
+        });
+        personview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddNeedPage.this,PersonPage.class);
+                startActivity(intent);
+            }
+        });
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                titleview.setText("");
+                textview.setText("");
+                moneyview.setText("");
+            }
+        });
         submitview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +93,7 @@ public class AddNeedPage extends AppCompatActivity{
                 }
                 else
                 {
-
                     Date date=new Date();
-
                     SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
                     String  userid=sharedPreferences.getString("user_id","");
                     Log.d("AddNeedPagePost","发布需求的用户id为"+userid);
@@ -99,8 +121,8 @@ public class AddNeedPage extends AppCompatActivity{
                         public void onResponse(Call call, Response response) throws IOException {
                             String  result = response.body().string();
                             Log.d("MainActivity",result);
-                            User user = JSON.parseObject(result, User.class);
-                            int userid = user.getId();
+                            Need need = JSON.parseObject(result, Need.class);
+                            int userid =need.getUserid();
                             if (response.body()!=null){
                                 response.body().close();
                                 Looper.prepare();

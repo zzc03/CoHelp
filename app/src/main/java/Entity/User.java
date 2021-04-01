@@ -5,19 +5,33 @@ package Entity;
  */
 
 public class User {
-    private int id;
-    private String account;
-    private String password;
+
+    private Integer userId;
+
     private String name;
-    //待加信息
 
+    private String account;
 
-    public int getId() {
-        return id;
+    private String password;
+
+    private String description;
+
+    private Integer money;
+
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAccount() {
@@ -36,11 +50,43 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    public User() {
+    }
+
+    public User(Integer userId, String name, String account, String password, String description, Integer money) {
+        this.userId = userId;
         this.name = name;
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.money = money;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", money=" + money +
+                '}';
     }
 }
