@@ -5,6 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+
+           <EditText
+               android:layout_width="300dp"
+               android:layout_height="wrap_content"
+               android:id="@+id/mainpagesearchedittext"
+               android:layout_gravity="center_vertical"
+               android:layout_margin="10dp"
+               android:drawableLeft="@drawable/search"
+               android:drawablePadding="5dp"
+
+               android:background="#ffffff"
+               android:textSize="16sp"
+               android:imeOptions="actionSearch"
+               android:inputType="text"
+               android:hint="请输入关键字"/>
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/delete"
+               android:alpha="1"
+               android:id="@+id/mainpagesearchdelete"
+               android:layout_gravity="right|center_vertical"
+               android:layout_marginLeft="30dp"
+               />
+
+   </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"

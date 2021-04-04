@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:andorid="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
@@ -11,19 +11,32 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
 
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/defaulthead" />
-
-        <TextView
-            android:id="@+id/item_need_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="昵称"
-            android:textSize="24sp" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/item_need_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:layout_marginLeft="15dp"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_need_time"
+                android:text="时间"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -31,39 +44,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="题目"
-        android:textSize="18sp" />
+        android:textSize="28sp"
+        android:layout_marginLeft="10dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="文本"
-        android:id="@+id/item_need_text"/>
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="2"
+        android:textSize="24sp"
+        android:id="@+id/item_need_text"
+        android:layout_marginLeft="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/item_need_money"
             android:layout_weight="1"
-            android:text="悬赏"/>
+            android:text="悬赏"
+            android:textSize="24sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/item_need_time"
-            android:layout_weight="1"
-            android:text="时间"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/item_need_state"
             android:layout_weight="1"
-            android:text="状态"/>
+            android:text="状态"
+            android:textSize="24sp"/>
     </LinearLayout>
-
-
-
-
 </LinearLayout>
