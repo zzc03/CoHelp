@@ -6,7 +6,8 @@
     xmlns:andorid="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    tools:layout_editor_absoluteY="8dp"
+    android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,13 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/item_need_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="昵称"
                 android:layout_marginLeft="15dp"
-                android:textSize="30sp" />
+                android:text="昵称"
+                android:textSize="24sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,19 +45,21 @@
         android:id="@+id/item_need_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="题目"
-        android:textSize="28sp"
-        android:layout_marginLeft="10dp"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/item_need_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="文本"
+        android:layout_marginLeft="10dp"
         android:ellipsize="end"
-        android:singleLine="true"
         android:lines="2"
-        android:textSize="24sp"
-        android:id="@+id/item_need_text"
-        android:layout_marginLeft="10dp"/>
+        android:singleLine="true"
+        android:text="文本"
+        android:textSize="14sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,20 +67,20 @@
         android:layout_marginLeft="10dp">
 
         <TextView
+            android:id="@+id/item_need_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_need_money"
             android:layout_weight="1"
             android:text="悬赏"
-            android:textSize="24sp"/>
+            android:textSize="14sp" />
 
 
         <TextView
+            android:id="@+id/item_need_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_need_state"
             android:layout_weight="1"
             android:text="状态"
-            android:textSize="24sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

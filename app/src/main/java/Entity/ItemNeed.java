@@ -41,4 +41,13 @@ public class ItemNeed {
     public void setState(String state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "ItemNeed{" +
+                "need=" + need +
+                ", userName='" + userName + '\'' +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

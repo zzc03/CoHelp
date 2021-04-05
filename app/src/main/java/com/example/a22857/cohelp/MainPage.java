@@ -104,14 +104,25 @@ public class MainPage extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListView listView=(ListView)parent;
-                ItemNeed itemNeed=(ItemNeed)listView.getItemAtPosition(position);
+                ItemNeed itemNeed=needs.get(position);
                 Integer needid=itemNeed.getNeed().getNeedid();
                 Intent intent=new Intent(MainPage.this,NeedInfoPage.class);
                 intent.putExtra("needid",needid);
                 startActivityForResult(intent,0);
             }
         });
+    }
+    private class NeedListviewClickListener implements AdapterView.OnItemClickListener{
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            ListView listview =(ListView)parent;
+            ItemNeed itemNeed=(ItemNeed)listview.getItemAtPosition(position);
+            Integer needid=itemNeed.getNeed().getNeedid();
+            Log.d("----result","要查询的needID为"+needid);
+            Intent intent=new Intent(MainPage.this,NeedInfoPage.class);
+            intent.putExtra("needid",needid);
+            startActivityForResult(intent,0);
+        }
     }
     public void initView()
     {

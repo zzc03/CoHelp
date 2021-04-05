@@ -39,14 +39,16 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp">
+
         <TextView
+            android:id="@+id/personinfopagetitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="标题"
-            android:id="@+id/personinfopagetitle"
-            android:textSize="30sp"
+            android:ellipsize="end"
             android:lines="1"
-            android:ellipsize="end"/>
+            android:text="标题"
+            android:textSize="30sp"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +56,7 @@
             android:text="正文"
             android:id="@+id/personinfopagetext"
             android:textSize="30sp"
-            android:lines="8"
+            android:lines="4"
             android:ellipsize="end"/>
     </LinearLayout>
     <LinearLayout
@@ -74,5 +76,5 @@
         android:layout_height="wrap_content"
         android:text="接受"
         android:id="@+id/personinfopagebutton"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="130dp"/>
 </LinearLayout>
