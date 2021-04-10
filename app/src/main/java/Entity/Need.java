@@ -16,6 +16,7 @@ public class Need {
 
     private Integer reward;
     private Integer userid;
+    private Integer ismultiple;
 
     public Need() {
     }
@@ -54,6 +55,17 @@ public class Need {
         this.state = state;
         this.reward = reward;
         this.userid = userid;
+    }
+
+    public Need(Integer need_id, String title, String text, String time, String state, Integer reward, Integer userid, Integer ismultiple) {
+        this.need_id = need_id;
+        this.title = title;
+        this.text = text;
+        this.time = time;
+        this.state = state;
+        this.reward = reward;
+        this.userid = userid;
+        this.ismultiple = ismultiple;
     }
 
     public Integer getUserid() {
@@ -120,14 +132,25 @@ public class Need {
         this.reward = reward;
     }
 
+    public Integer getIsmultiple() {
+        return ismultiple;
+    }
+
+    public void setIsmultiple(Integer ismultiple) {
+        this.ismultiple = ismultiple;
+    }
+
     @Override
     public String toString() {
         return "Need{" +
-                "needid=" + need_id +
+                "need_id=" + need_id +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", time=" + time +
+                ", time='" + time + '\'' +
                 ", state='" + state + '\'' +
+                ", reward=" + reward +
+                ", userid=" + userid +
+                ", ismultiple=" + ismultiple +
                 '}';
     }
 }

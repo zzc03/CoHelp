@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class NeedInfoPage extends AppCompatActivity {
     private Button buttonview;
     private Handler handler;
     private String result;
+    private ListView resultview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class NeedInfoPage extends AppCompatActivity {
         textview=(TextView)findViewById(R.id.personinfopagetext);
         rewardview=(TextView)findViewById(R.id.personinfopagereward);
         buttonview=(Button)findViewById(R.id.personinfopagebutton);
+        resultview=(ListView)findViewById(R.id.needinfopagelistview);
         initView();
         buttonview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +58,12 @@ public class NeedInfoPage extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(NeedInfoPage.this,"接受成功",Toast.LENGTH_SHORT).show();
-//                                Intent intent=getIntent();
-//                                Integer needid=intent.getIntExtra("needid",0);
-//                                SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
-//                                String userid=sharedPreferences.getString("user_id","");
-//                                Intent intent1=new Intent();
+                                Intent intent=getIntent();
+                                Integer needid=intent.getIntExtra("needid",0);
+                                SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
+                                String userid=sharedPreferences.getString("user_id","");
+                                Intent intent1=new Intent(NeedInfoPage.this,NeedDoingPage.class);
+                                startActivityForResult(intent1,0);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
