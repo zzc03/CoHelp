@@ -17,8 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/underline"
-
-        android:layout_gravity="center">
+        android:layout_gravity="center_horizontal">
 
         <ImageView
             android:layout_width="40dp"
@@ -37,7 +36,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/underline">
 
         <ImageView
@@ -57,7 +56,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/mainSignin"

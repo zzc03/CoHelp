@@ -1,81 +1,60 @@
 package com.example.a22857.cohelp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.example.a22857.cohelp.adapter.NeedListViewAdapter;
+import com.alibaba.fastjson.JSONArray;
 import com.example.a22857.cohelp.adapter.ResultListviewAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import Entity.ItemNeed;
 import Entity.ItemResult;
-import Entity.User;
 
-public class NeedInfoPage extends AppCompatActivity {
+public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
     private TextView nameview;
     private TextView timeview;
     private TextView titleview;
     private TextView textview;
     private TextView rewardview;
-    private Button buttonview;
     private ListView resultview;
+    private List<ItemResult> results=new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.needinfopage);
-        nameview=(TextView)findViewById(R.id.personinfopagename);
-        timeview=(TextView)findViewById(R.id.personinfopagetime);
-        titleview=(TextView)findViewById(R.id.personinfopagetitle);
-        textview=(TextView)findViewById(R.id.personinfopagetext);
-        rewardview=(TextView)findViewById(R.id.personinfopagereward);
-        buttonview=(Button)findViewById(R.id.personinfopagebutton);
-        resultview=(ListView)findViewById(R.id.needinfopagelistview);
-        initView();
-        buttonview.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.mypublicneeddoinginfopage);
+        nameview=(TextView)findViewById(R.id.mypublicneeddoinginfopagename);
+        timeview=(TextView)findViewById(R.id.mypublicneeddoinginfopagetime);
+        titleview=(TextView)findViewById(R.id.mypublicneeddoinginfopagetitle);
+        textview=(TextView)findViewById(R.id.mypublicneeddoinginfopagetext);
+        rewardview=(TextView)findViewById(R.id.mypublicneeddoinginfopagereward);
+        resultview=(ListView)findViewById(R.id.mypublicneeddoinginfolistview);
+        resultview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(NeedInfoPage.this).setTitle("提示")
-                        .setMessage("是否接受该需求")
-                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(NeedInfoPage.this,"接受成功",Toast.LENGTH_SHORT).show();
-                                Intent intent=getIntent();
-                                Integer needid=intent.getIntExtra("needid",0);
-                                SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
-                                String userid=sharedPreferences.getString("user_id","");
-                                Intent intent1=new Intent(NeedInfoPage.this,NeedDoingPage.class);
-                                intent1.putExtra("needid",needid);
-                                startActivityForResult(intent1,0);
-                            }
-                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                }).show();
-
-
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ItemResult itemNeed=results.get(position);
+                Integer resultid=itemNeed.getResult().getResultId();
+                Intent intent=new Intent(MyPublicNeedDoingInfoPage.this,SetRewardPage.class);
+                intent.putExtra("resultid",resultid);
+                startActivityForResult(intent,0);
             }
         });
+        initView();
     }
     public void initView()
     {
@@ -120,8 +99,6 @@ public class NeedInfoPage extends AppCompatActivity {
             Integer userid=Integer.getInteger(sharedPreferences.getString("user_id",""));
             rewardview.setText("悬赏积分："+a.getNeed().getReward()+"积分");
             Log.d("----result","接受到的needstate为"+a.getState());
-            IsAccepted isAccepted=new IsAccepted();
-            isAccepted.execute(a.getNeed().getNeedid(),userid);
         }
     }
     class QueryResultByNeedId extends AsyncTask<Integer, Integer, String> {
@@ -135,45 +112,23 @@ public class NeedInfoPage extends AppCompatActivity {
             int needid=params[0];
             HashMap map=new HashMap();
             map.put("needid",needid+"");
-            String result=inter.doGet("http://10.0.2.2:8080/result/querybyid",map);
+            String result=inter.doGet("http://10.0.2.2:8080/result/querybyneedid",map);
+            Log.d("----result","接受到的result为"+result);
             return result;
         }
         @Override
         protected void onProgressUpdate(Integer... progress) {}
         @Override
         protected void onPostExecute(String text) {
+           // Gson gson=new Gson();
+           // List<ItemResult> a=gson.fromJson(text,new TypeToken<List<ItemResult>>() {}.getType());
             List<ItemResult> a= JSON.parseArray(text, ItemResult.class);
             Log.d("----result","接受到的need为"+a);
-            ResultListviewAdapter adapter=new ResultListviewAdapter(NeedInfoPage.this,a);
+//            Log.d("----result","接受到的need为"+results);
+            results=a;
+            ResultListviewAdapter adapter=new ResultListviewAdapter(MyPublicNeedDoingInfoPage.this,a);
             resultview.setAdapter(adapter);
-        }
-    }
-    class IsAccepted extends AsyncTask<Integer, Integer, String> {
-        Interface inter = new Interface();
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-        @Override
-        protected String doInBackground(Integer... params) {
-            Integer needid=params[0];
-            Integer userid=params[1];
-            HashMap map=new HashMap();
-            map.put("needid",needid+"");
-            map.put("userid",userid+"");
-            String result=inter.doGet("http://10.0.2.2:8080/result/querybyneedidanduserid",map);
-            return result;
-        }
-        @Override
-        protected void onProgressUpdate(Integer... progress) {}
-        @Override
-        protected void onPostExecute(String text) {
-           if(text.equals("true"))
-           {
-               buttonview.setText("你已接受");
-               buttonview.setEnabled(false);
-           }
-        }
-    }
 
+        }
+    }
 }

@@ -84,9 +84,9 @@ public class NeedListViewAdapter extends BaseAdapter {
         //viewHolder.text.setTextSize(15);
         viewHolder.money.setText("悬赏"+item.getNeed().getReward()+"积分");
         //viewHolder.money.setTextSize(15);
-        viewHolder.time.setText(item.getNeed().getTime().toString());
+        viewHolder.time.setText(item.getNeed().getTime().substring(5));
         //viewHolder.time.setTextSize(15);
-        viewHolder.state.setText(item.getState());
+        viewHolder.state.setText(item.getNeed().getState());
         //viewHolder.state.setTextSize(15);
         return v;
     }
