@@ -68,6 +68,13 @@ public class PersonPage extends AppCompatActivity{
                 startActivityForResult(intent,0);
             }
         });
+        mydoingneedview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PersonPage.this,MydoingNeedPage.class);
+                startActivityForResult(intent,0);
+            }
+        });
     }
     public void initView()
     {

@@ -12,6 +12,7 @@ public class Result {
     private String accepttext;
     private Integer picture;
     private Integer reward;
+    private String comment;
 
     public Result() {
     }
@@ -24,6 +25,17 @@ public class Result {
         this.accepttext = accepttext;
         this.picture = picture;
         this.reward = reward;
+    }
+
+    public Result(Integer needid, Integer acceptuserid, String state, String accepttime, String accepttext, Integer picture, Integer reward, String comment) {
+        this.needid = needid;
+        this.acceptuserid = acceptuserid;
+        this.state = state;
+        this.accepttime = accepttime;
+        this.accepttext = accepttext;
+        this.picture = picture;
+        this.reward = reward;
+        this.comment = comment;
     }
 
     public Integer getResultId() {
@@ -90,6 +102,14 @@ public class Result {
         this.reward = reward;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "Result{" +
@@ -101,6 +121,7 @@ public class Result {
                 ", accepttext='" + accepttext + '\'' +
                 ", picture=" + picture +
                 ", reward=" + reward +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }

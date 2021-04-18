@@ -6,16 +6,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="姓名"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_weight="1"
         android:id="@+id/itemresultname"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2021-01-01 19:22:00"
-        android:textSize="20sp"
-
+        android:text="01-01 19:22:00"
+        android:textSize="30sp"
         android:layout_weight="1"
         android:id="@+id/itemresulttiem"/>
     <TextView
@@ -23,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="状态"
         android:layout_weight="1"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_marginLeft="30dp"
         android:id="@+id/itemresultstate"/>
 
