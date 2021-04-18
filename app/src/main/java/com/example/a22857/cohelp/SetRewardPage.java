@@ -1,19 +1,33 @@
 package com.example.a22857.cohelp;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +40,16 @@ import com.lzy.imagepicker.view.CropImageView;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import Entity.ItemNeed;
 import Entity.ItemResult;
@@ -60,6 +78,8 @@ public class SetRewardPage extends AppCompatActivity {
     private int maxImgCount = 8;//允许选择图片最大数
     private HttpUtil httpUtil;
     private Integer resultidnum=0;
+    private RecyclerView picturdisplayeview;
+    private EditText commentview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +91,13 @@ public class SetRewardPage extends AppCompatActivity {
         pictureview=(TextView)findViewById(R.id.setrewardpagepicture);
         buttonview=(Button)findViewById(R.id.setrewardpagebutton);
         editText=(EditText)findViewById(R.id.setrewardpagereward);
+        picturdisplayeview=(RecyclerView)findViewById(R.id.setrewardpagepictureview);
+        commentview=(EditText)findViewById(R.id.setrewardpagecomment);
         buttonview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String reward=editText.getText().toString();
+                String comment=commentview.getText().toString();
                 if(!reward.equals(""))
                 {
                     Integer rewardnum=Integer.parseInt(reward);
@@ -84,6 +107,7 @@ public class SetRewardPage extends AppCompatActivity {
                     RequestBody requestBody = requestBuild
                             .add("resultid",resultidnum+"")
                             .add("reward",reward)
+                            .add("comment",comment)
                             .build();
                     Request request = new Request.Builder()
                             .url(url)
@@ -125,6 +149,16 @@ public class SetRewardPage extends AppCompatActivity {
             queryResultById.execute(resultid);
         }
     }
+    public List<Bitmap> getbitmap(List<String> image)
+    {
+        List<Bitmap> results=new ArrayList<>();
+        for(String a:image)
+        {
+            byte[] bytes=Base64.decode(a,Base64.DEFAULT);
+            results.add(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+        }
+        return results;
+    }
     class QueryResultById extends AsyncTask<Integer, Integer, String> {
         Interface inter = new Interface();
         @Override
@@ -155,17 +189,116 @@ public class SetRewardPage extends AppCompatActivity {
             }
             else
             {
-                pictureview.setText(result.getPictures()+"");
-            }
-//            byte[][] pictures=new byte[result.getPictures().length][];
-//            pictures=result.getPictures();
-//            List<Bitmap> bitmaps=new ArrayList<>();
-//            for(byte[] a:pictures)
-//            {
-//                Bitmap b=BitmapFactory.decodeByteArray(a, 0, a.length);
-//
-//            }
+                Log.d("SetRewardpage","要展示的图片为"+result.getPictures());
+                pictureview.setText("图片如下");
+                List<Bitmap> bitmaps=getbitmap(result.getPictures());
+                Log.d("SetRewardpage","要展示的bitmap图片为"+bitmaps);
+                if(result.getPictures().size()!=0)
+                {
+                    GridLayoutManager layoutManager=new GridLayoutManager(SetRewardPage.this,4);
+                    picturdisplayeview.setLayoutManager(layoutManager);
 
+                    imgAdapter adapter=new imgAdapter(bitmaps);
+                    picturdisplayeview.setAdapter(adapter);
+                }
+                else
+                {
+                    pictureview.setText("图片加载失败");
+                }
+
+            }
+        }
+    }
+    class imgAdapter extends RecyclerView.Adapter<imgAdapter.ViewHolder>{
+        private List<Bitmap> list;
+        public imgAdapter(List<Bitmap> list){ this.list = list; }
+
+        class ViewHolder extends RecyclerView.ViewHolder{
+            View myView;
+            ImageView largeview;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                myView = itemView;
+                largeview=(ImageView)myView.findViewById(R.id.iv_fangda_img);
+            }
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(SetRewardPage.this).inflate(R.layout.otheractivity, parent, false);
+            return new ViewHolder(v);
+        }
+
+        @SuppressLint("NewApi")
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Log.d("SetRewardpage","进入适配器后要展示的bitmaps图片为"+list);
+            final Bitmap img = list.get(position);
+
+            Log.d("SetRewardpage","进入适配器后要展示的下标为"+position);
+            Log.d("SetRewardpage","进入适配器后要展示的bitmap图片为"+img);
+            if(holder.largeview==null)
+            {
+                Log.d("SetRewardpage","largeview为空");
+            }
+            holder.largeview.setImageBitmap(img);
+            holder.myView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View ve) {
+                    final Dialog dialog=new Dialog(SetRewardPage.this,R.style.Widget_AppCompat_Light_ActionBar);
+                    ImageView imageView=new ImageView(SetRewardPage.this);
+                    imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    imageView.setImageBitmap(img);
+                    dialog.setContentView(imageView);
+                    dialog.show();
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+//                    ve.getContext().startActivity(
+//                            new Intent(ve.getContext(),OtherActivity.class),
+//                            // 注意这里的sharedView
+//                            // Content，View（动画作用view），String（和XML一样）
+//                            ActivityOptions.makeSceneTransitionAnimation((Activity) ve.getContext(),
+//                                    ve,"sharedView").toBundle()
+//                    );
+//                    LayoutInflater inflater=LayoutInflater.from(SetRewardPage.this);
+//                    View imgEntryView=inflater.inflate(R.layout.otheractivity,null);
+//                    final AlertDialog alertDialog=new AlertDialog.Builder(SetRewardPage.this).create();
+//                    alertDialog.setView(largeview);
+//                    alertDialog.show();
+//                    imgEntryView.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            alertDialog.cancel();
+//                        }
+//                    });
+
+//                    final AlertDialog alertDialog=new AlertDialog.Builder(SetRewardPage.this).create();
+//                    alertDialog.setContentView(R.layout.otheractivity);
+//                    largeview.setImageBitmap(img);
+//                    alertDialog.setCanceledOnTouchOutside(true);
+//                    Window w=alertDialog.getWindow();
+//                    WindowManager.LayoutParams lp=w.getAttributes();
+//                    lp.x=0;
+//                    lp.y=40;
+//                    alertDialog.onWindowAttributesChanged(lp);
+//                    largeview.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            alertDialog.dismiss();
+//                        }
+//                    });
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return list == null ? 0 : list.size();
         }
     }
 

@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="正文"
-            android:lines="5"
+            android:lines="3"
             android:ellipsize="end"
             android:id="@+id/setrewardpagetext"
             android:textSize="30sp"/>
@@ -54,7 +54,18 @@
             android:text="无图片"
             android:textSize="30sp"
             android:id="@+id/setrewardpagepicture"/>
+       <android.support.v7.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/setrewardpagepictureview"/>
     </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/setrewardpagecomment"
+        android:lines="3"
+        android:layout_weight="2"
+        android:hint="请输入本次服务评价"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

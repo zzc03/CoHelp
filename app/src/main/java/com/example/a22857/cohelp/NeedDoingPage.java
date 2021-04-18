@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,6 +64,7 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
     private EditText editText;
     private TextView reward;
     private Integer needid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,10 +199,12 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
     }
     private void uploadImage(ArrayList<ImageItem> pathList,String answer) {
         byte[][] pictures=new byte[pathList.size()][];
+        List<String> strings=new ArrayList<>();
         int i=0;
         for(ImageItem a:pathList)
         {
             pictures[i]=ConvertImage(a);
+            strings.add(Base64.encodeToString((pictures[i]),Base64.DEFAULT));
             i++;
         }
         String url = "http://10.0.2.2:8080/result/add";
@@ -215,7 +219,7 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
                 .add("needid",needid+"")
                 .add("userid",userid+"")
                 .add("text",editText.getText().toString())
-                .add("picture",pictures+"")
+                .add("picture",strings+"")
                 .build();
         Request request = new Request.Builder()
                 .url(url)
