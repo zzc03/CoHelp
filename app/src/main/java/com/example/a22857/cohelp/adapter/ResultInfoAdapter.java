@@ -72,7 +72,7 @@ public class ResultInfoAdapter  extends BaseAdapter {
         viewHolder.name.setText(item.getName());
         viewHolder.time.setText(item.getResult().getAccepttime().substring(5));
         viewHolder.state.setText(item.getResult().getState());
-        if(item.getResult().getComment().equals(""))
+        if(item.getResult().getComment()==null)
         {
             viewHolder.comment.setText("未发布评论");
         }
@@ -80,7 +80,7 @@ public class ResultInfoAdapter  extends BaseAdapter {
         {
             viewHolder.comment.setText(item.getResult().getComment());
         }
-        viewHolder.reward.setText(item.getResult().getReward()+"");
+        viewHolder.reward.setText(item.getResult().getReward()+"积分");
         return v;
     }
 
