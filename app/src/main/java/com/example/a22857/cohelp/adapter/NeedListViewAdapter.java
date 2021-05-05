@@ -2,10 +2,16 @@ package com.example.a22857.cohelp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.a22857.cohelp.R;
@@ -49,6 +55,7 @@ public class NeedListViewAdapter extends BaseAdapter {
         TextView money ;
         TextView time ;
         TextView state ;
+        ImageButton head;
     }
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -67,6 +74,7 @@ public class NeedListViewAdapter extends BaseAdapter {
             viewHolder.money = (TextView) v.findViewById(R.id.item_need_money);
             viewHolder.time = (TextView) v.findViewById(R.id.item_need_time);
             viewHolder.state = (TextView) v.findViewById(R.id.item_need_state);
+            viewHolder.head=(ImageButton) v.findViewById(R.id.item_need_head) ;
             //convertView.setTag(viewHolder);
             v.setTag(viewHolder);
 
@@ -88,7 +96,23 @@ public class NeedListViewAdapter extends BaseAdapter {
         //viewHolder.time.setTextSize(15);
         viewHolder.state.setText(item.getNeed().getState());
         //viewHolder.state.setTextSize(15);
+        byte[] bytes= Base64.decode(item.getHead(),Base64.DEFAULT);
+        Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+        viewHolder.head.setImageBitmap(setBitmap(bitmap,100,100));
         return v;
+    }
+    public Bitmap setBitmap(Bitmap bitmap,int height,int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
     }
 
 }

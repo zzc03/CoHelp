@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a22857.cohelp.R;
@@ -46,6 +47,7 @@ public class ResultInfoAdapter  extends BaseAdapter {
         TextView state ;
         TextView comment;
         TextView reward;
+        Button button;
     }
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -61,6 +63,7 @@ public class ResultInfoAdapter  extends BaseAdapter {
             viewHolder.state = (TextView) v.findViewById(R.id.resultinfostate);
             viewHolder.comment=(TextView) v.findViewById(R.id.resultinfocomment);
             viewHolder.reward=(TextView) v.findViewById(R.id.resultinforeward);
+
             v.setTag(viewHolder);
 
         }
@@ -81,6 +84,7 @@ public class ResultInfoAdapter  extends BaseAdapter {
             viewHolder.comment.setText(item.getResult().getComment());
         }
         viewHolder.reward.setText(item.getResult().getReward()+"积分");
+
         return v;
     }
 

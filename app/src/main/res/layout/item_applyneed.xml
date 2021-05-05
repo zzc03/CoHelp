@@ -18,7 +18,7 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/item_need_head"
+            android:id="@+id/item_needapply_head"
             android:src="@drawable/defaulthead"
             android:background="#00FF0000"/>
         <LinearLayout
@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_need_name"
+                android:id="@+id/item_needapply_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -36,15 +36,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_need_time"
+                android:id="@+id/item_needapply_time"
                 android:text="时间"
                 android:textSize="20sp"/>
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仲裁"
+            android:id="@+id/item_needapply_zhongcai"
+            android:layout_marginLeft="100dp"/>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/item_need_title"
+        android:id="@+id/item_needapply_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -53,7 +59,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/item_need_text"
+        android:id="@+id/item_needapply_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -61,7 +67,7 @@
         android:lines="2"
         android:singleLine="true"
         android:text="文本"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,20 +75,25 @@
         android:layout_marginLeft="10dp">
 
         <TextView
-            android:id="@+id/item_need_money"
+            android:id="@+id/item_needapply_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="悬赏"
-            android:textSize="14sp" />
-
-
+            android:textSize="20sp" />
         <TextView
-            android:id="@+id/item_need_state"
+            android:id="@+id/item_needapply_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="状态"
-            android:textSize="14sp" />
+            android:text="审核结果"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/item_needapply_viewtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="审核意见"
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>

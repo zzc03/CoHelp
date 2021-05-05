@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:andorid="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp"
-    android:descendantFocusability="blocksDescendants">
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp">
 
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/item_need_head"
+            android:id="@+id/zhongcai_head"
             android:src="@drawable/defaulthead"
             android:background="#00FF0000"/>
         <LinearLayout
@@ -27,33 +23,34 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_need_name"
+                android:id="@+id/zhongcai_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="昵称"
-                android:textSize="24sp" />
+                android:textSize="30sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_need_time"
+                android:id="@+id/zhongcai_time"
                 android:text="时间"
-                android:textSize="20sp"/>
+                android:textSize="25sp"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/item_need_title"
+        android:id="@+id/zhongcai_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="题目"
-        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/item_need_text"
+        android:id="@+id/zhongcai_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -61,28 +58,54 @@
         android:lines="2"
         android:singleLine="true"
         android:text="文本"
-        android:textSize="14sp" />
+        android:layout_marginTop="10dp"
+        android:textSize="30sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/item_need_money"
+            android:id="@+id/zhongcai_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="悬赏"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
 
         <TextView
-            android:id="@+id/item_need_state"
+            android:id="@+id/zhongcai_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="状态"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请说明原因"
+            android:textSize="30sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/zhongcai_reason"
+            android:lines="5"/>
+    </LinearLayout>
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="申请仲裁"
+    android:id="@+id/zhongcai_btn"
+    android:textSize="20sp"/>
+
 </LinearLayout>
+

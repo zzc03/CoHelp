@@ -2,6 +2,8 @@ package com.example.a22857.cohelp;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +60,7 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
     private int maxImgCount = 8;//允许选择图片最大数
     private HttpUtil httpUtil;
     private Button submitview;
+    private ImageButton headview;
     private TextView title;
     private TextView name;
     private TextView time;
@@ -77,6 +81,7 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
         textview=(TextView)findViewById(R.id.needdoingpagetext);
         editText=(EditText)findViewById(R.id.needdoingpageedittext);
         reward=(TextView)findViewById(R.id.needdoingpagereward);
+        headview=(ImageButton)findViewById(R.id.needdoingpagehead);
         submitview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,6 +301,10 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
             time.setText(a.getNeed().getTime().substring(5));
             title.setText(a.getNeed().getTitle());
             textview.setText(a.getNeed().getText());
+            byte[] bytes= Base64.decode(a.getHead(),Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+            headview.setImageBitmap(setBitmap(bitmap,100,100));
             reward.setText(a.getNeed().getReward()+"积分");
             Log.d("----result","接受到的needstate为"+a.getState());
 //            if(!a.getNeed().getState().equals("none"))
@@ -304,6 +313,18 @@ public class NeedDoingPage extends AppCompatActivity implements ImagePickerAdapt
 //                buttonview.setEnabled(false);
 //            }
         }
+    }
+    public Bitmap setBitmap(Bitmap bitmap, int height, int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
     }
 
 }

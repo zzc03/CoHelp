@@ -3,6 +3,9 @@ package com.example.a22857.cohelp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,9 +13,11 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +41,7 @@ public class NeedInfoPage extends AppCompatActivity {
     private TextView rewardview;
     private Button buttonview;
     private ListView resultview;
+    private ImageView headview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,7 @@ public class NeedInfoPage extends AppCompatActivity {
         rewardview=(TextView)findViewById(R.id.personinfopagereward);
         buttonview=(Button)findViewById(R.id.personinfopagebutton);
         resultview=(ListView)findViewById(R.id.needinfopagelistview);
+        headview=(ImageView)findViewById(R.id.personinfopagehead);
         initView();
         buttonview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +123,10 @@ public class NeedInfoPage extends AppCompatActivity {
             timeview.setText(a.getNeed().getTime());
             titleview.setText(a.getNeed().getTitle());
             textview.setText(a.getNeed().getText());
+            byte[] bytes= Base64.decode(a.getHead(),Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+            headview.setImageBitmap(setBitmap(bitmap,100,100));
             SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
             Integer userid=Integer.getInteger(sharedPreferences.getString("user_id",""));
             rewardview.setText("悬赏积分："+a.getNeed().getReward()+"积分");
@@ -123,6 +134,18 @@ public class NeedInfoPage extends AppCompatActivity {
             IsAccepted isAccepted=new IsAccepted();
             isAccepted.execute(a.getNeed().getNeedid(),userid);
         }
+    }
+    public Bitmap setBitmap(Bitmap bitmap, int height, int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
     }
     class QueryResultByNeedId extends AsyncTask<Integer, Integer, String> {
         Interface inter = new Interface();

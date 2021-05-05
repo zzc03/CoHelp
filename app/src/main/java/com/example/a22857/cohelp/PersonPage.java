@@ -2,14 +2,19 @@ package com.example.a22857.cohelp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +29,13 @@ public class PersonPage extends AppCompatActivity{
     private TextView moneyview;
     private TextView descriptionview;
     private TextView myneedview;
+    private TextView myapplyview;
+    private ImageView headview;
     private TextView mydoingneedview;
     private Button mainpagebutton;
     private Button addbutton;
     private Button personbutton;
+    private Button exitbtn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,9 @@ public class PersonPage extends AppCompatActivity{
         mainpagebutton=(Button)findViewById(R.id.personpagemain);
         addbutton=(Button)findViewById(R.id.personpageadd);
         personbutton=(Button)findViewById(R.id.personpageperson);
+        headview=(ImageView)findViewById(R.id.personpagehead);
+        myapplyview=(TextView)findViewById(R.id.personpagemyapplyneed);
+        exitbtn=(Button)findViewById(R.id.personpagequitbutton);
         mainpagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +86,20 @@ public class PersonPage extends AppCompatActivity{
                 startActivityForResult(intent,0);
             }
         });
+        myapplyview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PersonPage.this,ApplyNeedPage.class);
+                startActivityForResult(intent,0);
+            }
+        });
+        exitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PersonPage.this,MainActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
     }
     public void initView()
     {
@@ -92,6 +117,10 @@ public class PersonPage extends AppCompatActivity{
                 nameview.setText(a.getName());
                 moneyview.setText(a.getMoney()+"");
                 descriptionview.setText(a.getDescription());
+                byte[] bytes= Base64.decode(a.getIcon(),Base64.DEFAULT);
+                Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+                headview.setImageBitmap(setBitmap(bitmap,100,100));
                 Looper.loop();
 
 
@@ -115,5 +144,17 @@ public class PersonPage extends AppCompatActivity{
 
             }
         }).start();
+    }
+    public Bitmap setBitmap(Bitmap bitmap, int height, int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
     }
 }

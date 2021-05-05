@@ -151,6 +151,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //String result = data.getExtras().getString("result");//得到新Activity 关闭后返回的数据
+        account.setText("");
+        password.setText("");
+    }
     class QueryBlogByText extends AsyncTask<String, Integer, String> {
         Interface inter = new Interface();
 

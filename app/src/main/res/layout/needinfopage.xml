@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="9"
         android:orientation="vertical">
         <LinearLayout
@@ -13,8 +13,8 @@
             android:orientation="horizontal"
             android:layout_marginTop="50dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/defaulthead"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/personinfopagehead"/>
@@ -86,11 +86,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/needinfopagelistview"/>
     </LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="接受"
-        android:id="@+id/personinfopagebutton"
-        android:layout_marginTop="130dp"/>
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="接受"
+            android:id="@+id/personinfopagebutton"/>
+    </LinearLayout>
+
 </LinearLayout>

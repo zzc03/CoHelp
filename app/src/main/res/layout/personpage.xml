@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="70dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -21,15 +21,15 @@
                 android:textSize="30sp"/>
             <ImageView
                 android:id="@+id/personpagehead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="30dp"
                 android:src="@drawable/defaulthead"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="70dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="70dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="70dp">
             <TextView
                 android:layout_width="wrap_content"
@@ -86,10 +86,10 @@
             android:id="@+id/personpagemyneed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的任务"
+            android:text="我发布成功的"
             android:textSize="30sp"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:id="@+id/personpagemydoingneed"
             android:layout_width="wrap_content"
@@ -97,14 +97,22 @@
             android:text="我接受的"
             android:textSize="30sp"
             android:layout_marginLeft="70dp"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/personpagemyapplyneed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在申请的"
+            android:textSize="30sp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="退出登录"
             android:id="@+id/personpagequitbutton"
-            android:textSize="30sp"
-            android:layout_marginTop="25dp"/>
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
     <LinearLayout

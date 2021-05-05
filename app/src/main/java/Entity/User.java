@@ -17,6 +17,15 @@ public class User {
     private String description;
 
     private Integer money;
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -76,6 +85,16 @@ public class User {
         this.password = password;
         this.description = description;
         this.money = money;
+    }
+
+    public User(Integer userId, String name, String account, String password, String description, Integer money, String icon) {
+        this.userId = userId;
+        this.name = name;
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.money = money;
+        this.icon = icon;
     }
 
     @Override

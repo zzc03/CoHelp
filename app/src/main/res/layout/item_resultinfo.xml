@@ -31,6 +31,7 @@
           android:text="状态"
           android:id="@+id/resultinfostate"
           android:layout_marginLeft="80dp"/>
+
    </LinearLayout>
     <TextView
         android:layout_width="match_parent"

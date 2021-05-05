@@ -119,14 +119,10 @@ public class AddNeedPage extends AppCompatActivity{
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            String  result = response.body().string();
-                            Log.d("MainActivity",result);
-                            Need need = JSON.parseObject(result, Need.class);
-                            int userid =need.getUserid();
                             if (response.body()!=null){
                                 response.body().close();
                                 Looper.prepare();
-                                Toast.makeText(AddNeedPage.this,"你发布需求的用户id为："+ userid,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddNeedPage.this,"已申请发布，请等待管理员审核",Toast.LENGTH_SHORT).show();
                                 Intent inter = new Intent(AddNeedPage.this,MainPage.class);
                                 startActivityForResult(inter,0);
                                 Looper.loop();
