@@ -86,7 +86,7 @@
             android:id="@+id/personpagemyneed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我发布成功的"
+            android:text="已发布需求"
             android:textSize="30sp"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"/>
@@ -102,7 +102,7 @@
             android:id="@+id/personpagemyapplyneed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="正在申请的"
+            android:text="已申请的需求"
             android:textSize="30sp"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"/>

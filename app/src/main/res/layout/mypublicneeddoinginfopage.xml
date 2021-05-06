@@ -13,8 +13,8 @@
             android:orientation="horizontal"
             android:layout_marginTop="50dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/defaulthead"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/mypublicneeddoinginfopagehead"/>

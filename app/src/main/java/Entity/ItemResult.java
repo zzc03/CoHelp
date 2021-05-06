@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ItemResult {
+    private String icon;
     private Result result;
     private String name;
     private List<String> pictures;
@@ -16,6 +17,13 @@ public class ItemResult {
     }
 
     public ItemResult(Result result, String name, List<String> pictures) {
+        this.result = result;
+        this.name = name;
+        this.pictures = pictures;
+    }
+
+    public ItemResult(String icon, Result result, String name, List<String> pictures) {
+        this.icon = icon;
         this.result = result;
         this.name = name;
         this.pictures = pictures;
@@ -43,6 +51,14 @@ public class ItemResult {
 
     public void setPictures(List<String> pictures) {
         this.pictures = pictures;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @Override

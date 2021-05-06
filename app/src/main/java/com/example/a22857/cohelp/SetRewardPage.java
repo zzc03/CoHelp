@@ -80,6 +80,7 @@ public class SetRewardPage extends AppCompatActivity {
     private Integer resultidnum=0;
     private RecyclerView picturdisplayeview;
     private EditText commentview;
+    private ImageView headview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,7 @@ public class SetRewardPage extends AppCompatActivity {
         editText=(EditText)findViewById(R.id.setrewardpagereward);
         picturdisplayeview=(RecyclerView)findViewById(R.id.setrewardpagepictureview);
         commentview=(EditText)findViewById(R.id.setrewardpagecomment);
+        headview=(ImageView)findViewById(R.id.setrewardpagehead);
         buttonview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +161,18 @@ public class SetRewardPage extends AppCompatActivity {
         }
         return results;
     }
+    public Bitmap setBitmap(Bitmap bitmap, int height, int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
+    }
     class QueryResultById extends AsyncTask<Integer, Integer, String> {
         Interface inter = new Interface();
         @Override
@@ -183,6 +197,10 @@ public class SetRewardPage extends AppCompatActivity {
             timeview.setText(result.getResult().getAccepttime().substring(5));
             textview.setText(result.getResult().getAccepttext());
             resultidnum=result.getResult().getResultId();
+            byte[] bytes= Base64.decode(result.getIcon(),Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+            headview.setImageBitmap(setBitmap(bitmap,100,100));
             if(result.getResult().getPicture()==0)
             {
                 pictureview.setText("该用户未发布图片");
@@ -197,7 +215,6 @@ public class SetRewardPage extends AppCompatActivity {
                 {
                     GridLayoutManager layoutManager=new GridLayoutManager(SetRewardPage.this,4);
                     picturdisplayeview.setLayoutManager(layoutManager);
-
                     imgAdapter adapter=new imgAdapter(bitmaps);
                     picturdisplayeview.setAdapter(adapter);
                 }

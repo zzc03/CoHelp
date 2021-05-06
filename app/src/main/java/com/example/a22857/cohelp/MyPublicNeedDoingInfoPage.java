@@ -2,14 +2,19 @@ package com.example.a22857.cohelp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,6 +38,7 @@ public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
     private TextView textview;
     private TextView rewardview;
     private ListView resultview;
+    private ImageView headview;
     private List<ItemResult> results=new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
         textview=(TextView)findViewById(R.id.mypublicneeddoinginfopagetext);
         rewardview=(TextView)findViewById(R.id.mypublicneeddoinginfopagereward);
         resultview=(ListView)findViewById(R.id.mypublicneeddoinginfolistview);
+        headview=(ImageView)findViewById(R.id.mypublicneeddoinginfopagehead);
         resultview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,11 +102,27 @@ public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
             timeview.setText(a.getNeed().getTime());
             titleview.setText(a.getNeed().getTitle());
             textview.setText(a.getNeed().getText());
+            byte[] bytes= Base64.decode(a.getHead(),Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
+            headview.setImageBitmap(setBitmap(bitmap,100,100));
             SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
             Integer userid=Integer.getInteger(sharedPreferences.getString("user_id",""));
             rewardview.setText("悬赏积分："+a.getNeed().getReward()+"积分");
             Log.d("----result","接受到的needstate为"+a.getState());
         }
+    }
+    public Bitmap setBitmap(Bitmap bitmap, int height, int width)
+    {
+        int w=bitmap.getWidth();
+        int h=bitmap.getHeight();
+
+        float scaleW=((float)width)/w;
+        float scaleh=((float)height)/h;
+        Matrix matrix=new Matrix();
+        matrix.postScale(scaleW,scaleh);
+        return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
+
     }
     class QueryResultByNeedId extends AsyncTask<Integer, Integer, String> {
         Interface inter = new Interface();
