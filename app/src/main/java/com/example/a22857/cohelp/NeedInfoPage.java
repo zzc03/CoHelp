@@ -123,6 +123,14 @@ public class NeedInfoPage extends AppCompatActivity {
             timeview.setText(a.getNeed().getTime());
             titleview.setText(a.getNeed().getTitle());
             textview.setText(a.getNeed().getText());
+            final Intent intent=new Intent(NeedInfoPage.this,UserinfoPage.class);
+            intent.putExtra("userid",a.getNeed().getUserid());
+            headview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivityForResult(intent,0);
+                }
+            });
             byte[] bytes= Base64.decode(a.getHead(),Base64.DEFAULT);
             Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
             //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
@@ -158,7 +166,7 @@ public class NeedInfoPage extends AppCompatActivity {
             int needid=params[0];
             HashMap map=new HashMap();
             map.put("needid",needid+"");
-            String result=inter.doGet("http://10.0.2.2:8080/result/querybyid",map);
+            String result=inter.doGet("http://10.0.2.2:8080/result/querybyneedid",map);
             return result;
         }
         @Override

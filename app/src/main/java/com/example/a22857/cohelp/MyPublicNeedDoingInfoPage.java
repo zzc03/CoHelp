@@ -51,22 +51,26 @@ public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
         rewardview=(TextView)findViewById(R.id.mypublicneeddoinginfopagereward);
         resultview=(ListView)findViewById(R.id.mypublicneeddoinginfolistview);
         headview=(ImageView)findViewById(R.id.mypublicneeddoinginfopagehead);
-        resultview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ItemResult itemNeed=results.get(position);
-                Integer resultid=itemNeed.getResult().getResultId();
-                Intent intent=new Intent(MyPublicNeedDoingInfoPage.this,SetRewardPage.class);
-                intent.putExtra("resultid",resultid);
-                startActivityForResult(intent,0);
-            }
-        });
         initView();
     }
     public void initView()
     {
         Intent intent=getIntent();
         final Integer needid=intent.getIntExtra("needid",0);
+        int type=intent.getIntExtra("type",0);
+        if(type!=1)
+        {
+            resultview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ItemResult itemNeed=results.get(position);
+                    Integer resultid=itemNeed.getResult().getResultId();
+                    Intent intent=new Intent(MyPublicNeedDoingInfoPage.this,SetRewardPage.class);
+                    intent.putExtra("resultid",resultid);
+                    startActivityForResult(intent,0);
+                }
+            });
+        }
         Log.d("----result","接受到的needID为"+needid);
         if(needid!=0)
         {

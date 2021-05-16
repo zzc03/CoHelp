@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/personpageperson"
             android:layout_height="match_parent"
-            android:drawableTop="@drawable/person"
+            android:drawableTop="@drawable/personselect"
             android:layout_weight="1"
             android:background="#ffffff"
             android:text="我"

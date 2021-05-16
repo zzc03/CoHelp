@@ -60,6 +60,11 @@
         <activity android:name=".ZhongcaiPage"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".UserinfoPage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+
+
     </application>
 
 </manifest>

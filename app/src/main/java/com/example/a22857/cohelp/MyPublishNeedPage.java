@@ -34,6 +34,7 @@ public class MyPublishNeedPage extends AppCompatActivity {
                 Integer needid=itemNeed.getNeed().getNeedid();
                 Intent intent=new Intent(MyPublishNeedPage.this,MyPublicNeedDoingInfoPage.class);
                 intent.putExtra("needid",needid);
+                intent.putExtra("type",0);
                 startActivityForResult(intent,0);
             }
         });

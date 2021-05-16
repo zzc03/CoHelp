@@ -60,12 +60,14 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
     private EditText password;
     private EditText repassword;
     private EditText account;
+    private EditText descview;
     private Button sure;
     private Button cancal;
     private String nametext;
     private String passwordtext;
     private String repasswordtext;
     private String accounttext;
+    private String desc;
     private Bitmap bitmap = null;
     private ArrayList<ImageItem> selImageList;
     private ImagePickerAdapter adapter;
@@ -84,7 +86,7 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
         sure = (Button) findViewById(R.id.registerPageSure);
         cancal = (Button) findViewById(R.id.registerPageCancal);
         account = (EditText) findViewById(R.id.registerPageAccount);
-
+        descview=(EditText)findViewById(R.id.registerPagedesc);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +94,7 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                 passwordtext = password.getText().toString();
                 repasswordtext = repassword.getText().toString();
                 accounttext = account.getText().toString();
+                desc=descview.getText().toString();
                 if (accounttext.equals("") || nametext.equals("") || passwordtext.equals("") || repasswordtext.equals("")) {
                     AlertDialog alertDialog1 = new AlertDialog.Builder(RegisterPage.this)
                             .setTitle("提示")
@@ -125,7 +128,7 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                             .add("name", nametext)
                             .add("account", accounttext)
                             .add("password", passwordtext)
-                            .add("description", "我是" + nametext)
+                            .add("description", desc)
                             .add("money", "1000")
                             .add("head",Base64.encodeToString((ConvertImage(selImageList.get(0))),Base64.DEFAULT))
                             .build();

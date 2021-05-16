@@ -50,7 +50,7 @@
        <Button
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
-           android:drawableTop="@drawable/mainpage"
+           android:drawableTop="@drawable/mainpageselect"
            android:layout_weight="1"
            android:background="#ffffff"
            android:text="首页"

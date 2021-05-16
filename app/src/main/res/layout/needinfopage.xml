@@ -61,7 +61,7 @@
                 android:text="正文"
                 android:id="@+id/personinfopagetext"
                 android:textSize="30sp"
-                android:lines="4"
+                android:lines="3"
                 android:ellipsize="end"/>
         </LinearLayout>
         <LinearLayout

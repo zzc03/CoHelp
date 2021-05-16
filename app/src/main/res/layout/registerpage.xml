@@ -92,13 +92,19 @@
             android:textSize="30sp"
             android:hint="确认密码"/>
     </LinearLayout>
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="2"
+        android:hint="请说明自己的信息"
+        android:textSize="30sp"
+        android:id="@+id/registerPagedesc"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/registerPageSure"
