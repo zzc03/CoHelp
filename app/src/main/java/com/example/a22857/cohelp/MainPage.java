@@ -143,9 +143,11 @@ public class MainPage extends AppCompatActivity {
             needs.clear();
             for(ItemNeed b:a)
             {
-//                Log.d("----blogId+userName",b.getBlog().getBlogId()+b.getUserName());
+                if(b.getNeed().getIsmultiple()==0)
+                {
+                    needs.add(b);
+                }
 
-                needs.add(b);
             }
             return "done";
         }

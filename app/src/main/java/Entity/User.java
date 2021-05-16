@@ -18,6 +18,26 @@ public class User {
 
     private Integer money;
     private String icon;
+    private Integer isvalid;
+
+    public Integer getIsvalid() {
+        return isvalid;
+    }
+
+    public void setIsvalid(Integer isvalid) {
+        this.isvalid = isvalid;
+    }
+
+    public User(Integer userId, String name, String account, String password, String description, Integer money, String icon, Integer isvalid) {
+        this.userId = userId;
+        this.name = name;
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.money = money;
+        this.icon = icon;
+        this.isvalid = isvalid;
+    }
 
     public String getIcon() {
         return icon;
