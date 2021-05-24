@@ -146,12 +146,10 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                         public void onResponse(Call call, Response response) throws IOException {
                             String result = response.body().string();
                             Log.d("MainActivity", result);
-                            User user = JSON.parseObject(result, User.class);
-                            int userid = user.getUserId();
                             if (response.body() != null) {
                                 response.body().close();
                                 Looper.prepare();
-                                Toast.makeText(RegisterPage.this, "你注册的userID为：" + userid, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterPage.this, "注册申请成功，请等待", Toast.LENGTH_SHORT).show();
                                 Intent inter = new Intent(RegisterPage.this, MainActivity.class);
                                 startActivityForResult(inter, 0);
                                 Looper.loop();
