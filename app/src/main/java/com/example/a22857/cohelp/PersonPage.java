@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -19,23 +20,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.example.a22857.cohelp.adapter.MessageAdapter;
 
 import java.util.HashMap;
+import java.util.List;
 
+import Entity.ItemMessage;
 import Entity.User;
 
 public class PersonPage extends AppCompatActivity{
     private TextView nameview;
     private TextView moneyview;
     private TextView descriptionview;
-    private TextView myneedview;
-    private TextView myapplyview;
+    private TextView needview;
+    private TextView noticeview;
     private ImageView headview;
-    private TextView mydoingneedview;
+    private TextView messnumview;
     private Button mainpagebutton;
     private Button addbutton;
     private Button personbutton;
     private Button exitbtn;
+    private TextView calladminview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +48,27 @@ public class PersonPage extends AppCompatActivity{
         nameview=(TextView)findViewById(R.id.personpagename);
         moneyview=(TextView)findViewById(R.id.personpagemoney);
         descriptionview=(TextView)findViewById(R.id.personpagedescription);
-        myneedview=(TextView)findViewById(R.id.personpagemyneed);
-        mydoingneedview=(TextView)findViewById(R.id.personpagemydoingneed);
+        needview=(TextView)findViewById(R.id.personpageneed);
+        noticeview=(TextView)findViewById(R.id.personpagenotice);
         mainpagebutton=(Button)findViewById(R.id.personpagemain);
         addbutton=(Button)findViewById(R.id.personpageadd);
         personbutton=(Button)findViewById(R.id.personpageperson);
         headview=(ImageView)findViewById(R.id.personpagehead);
-        myapplyview=(TextView)findViewById(R.id.personpagemyapplyneed);
+        messnumview=(TextView)findViewById(R.id.personpagemessnum);
         exitbtn=(Button)findViewById(R.id.personpagequitbutton);
+        calladminview=(TextView)findViewById(R.id.personpagecalladmin);
         mainpagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(PersonPage.this,MainPage.class);
+                startActivityForResult(intent,0);
+            }
+        });
+        calladminview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PersonPage.this,CallAdminPage.class);
+                intent.putExtra("type","2");
                 startActivityForResult(intent,0);
             }
         });
@@ -72,31 +86,26 @@ public class PersonPage extends AppCompatActivity{
                 initView();
             }
         });
-        myneedview.setOnClickListener(new View.OnClickListener() {
+        needview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PersonPage.this,MyPublishNeedPage.class);
-                startActivityForResult(intent,0);
+                Intent intent=new Intent(PersonPage.this,MyNeedPage.class);
+                startActivity(intent);
+
             }
         });
-        mydoingneedview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(PersonPage.this,MydoingNeedPage.class);
-                startActivityForResult(intent,0);
-            }
-        });
-        myapplyview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(PersonPage.this,ApplyNeedPage.class);
-                startActivityForResult(intent,0);
-            }
-        });
+
         exitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(PersonPage.this,MainActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+        noticeview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PersonPage.this,NoticePage.class);
                 startActivityForResult(intent,0);
             }
         });
@@ -106,6 +115,8 @@ public class PersonPage extends AppCompatActivity{
         SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
         final String userid=sharedPreferences.getString("user_id","");
         final Interface inter = new Interface();
+        QueryMessageNumByReceiverid queryMessageNumByReceiverid=new QueryMessageNumByReceiverid();
+        queryMessageNumByReceiverid.execute(Integer.parseInt(userid));
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -122,26 +133,6 @@ public class PersonPage extends AppCompatActivity{
                 //Log.d("----bitmap","图片的大小为w:"+bitmap.getWidth()+"h："+bitmap.getHeight());
                 headview.setImageBitmap(setBitmap(bitmap,100,100));
                 Looper.loop();
-
-
-//                        Looper.prepare();
-//                        Log.d("MainActivity","查询到的user为"+a.toString());
-//                        SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
-//                        SharedPreferences.Editor editor=sharedPreferences.edit();
-//                        editor.putBoolean("is_login",true);
-//                        editor.putString("user_id",a.getUserId()+"");
-//                        Log.d("MainActivity","提交前的userID"+a.getUserId());
-//                        editor.commit();
-//                        Log.d("MainActivity","提交后的userID"+sharedPreferences.getString("user_id",""));
-//                        Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
-//                        Intent intent=new Intent(MainActivity.this,MainPage.class);
-//                        startActivity(intent);
-//                        Looper.loop();
-
-
-
-
-
             }
         }).start();
     }
@@ -149,12 +140,41 @@ public class PersonPage extends AppCompatActivity{
     {
         int w=bitmap.getWidth();
         int h=bitmap.getHeight();
-
         float scaleW=((float)width)/w;
         float scaleh=((float)height)/h;
         Matrix matrix=new Matrix();
         matrix.postScale(scaleW,scaleh);
         return Bitmap.createBitmap(bitmap,0,0,w,h,matrix,true);
 
+    }
+    class QueryMessageNumByReceiverid extends AsyncTask<Integer, Integer, String> {
+        Interface inter = new Interface();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Integer... params) {
+            Integer userid=params[0];
+            HashMap map=new HashMap();
+            map.put("userid",userid+"");
+            Log.d("----result","查询的userID为为"+userid);
+            String result=inter.doGet("http://10.0.2.2:8080/message/querybyuserid",map);
+            return result;
+        }
+        @Override
+        protected void onProgressUpdate(Integer... progress) {}
+
+        @Override
+        protected void onPostExecute(String text) {
+//            needs= JSON.parseArray(text, ItemNeed.class);
+//            NeedListViewAdapter needListViewAdapter=new NeedListViewAdapter(MyPublishNeedPage.this,needs);
+//            listView.setAdapter(needListViewAdapter);
+            List<ItemMessage> lists= JSON.parseArray(text,ItemMessage.class);
+//            ResultInfoAdapter adapter=new ResultInfoAdapter(MydoingNeedPage.this,lists);
+//            listView.setAdapter(adapter);
+            messnumview.setText(lists.size()+"");
+
+        }
     }
 }
