@@ -97,7 +97,6 @@ public class AddNeedPage extends AppCompatActivity{
                     SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
                     String  userid=sharedPreferences.getString("user_id","");
                     Log.d("AddNeedPagePost","发布需求的用户id为"+userid);
-//                    Need need=new Need(title,text,date,"未完成",money,userid);
                     String url = "http://10.0.2.2:8080/need/add";
                     OkHttpClient client = new OkHttpClient();
                     FormBody.Builder requestBuild = new FormBody.Builder();

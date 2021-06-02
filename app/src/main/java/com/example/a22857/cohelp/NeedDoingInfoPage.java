@@ -30,11 +30,6 @@ public class NeedDoingInfoPage extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                ItemNeed itemNeed=needs.get(position);
-//                Integer needid=itemNeed.getNeed().getNeedid();
-//                Intent intent=new Intent(MyPublishNeedPage.this,NeedInfoPage.class);
-//                intent.putExtra("needid",needid);
-//                startActivityForResult(intent,0);
                 ItemResult itemResult=results.get(position);
                 Integer resultid=itemResult.getResult().getResultId();
                 Intent intent=new Intent(NeedDoingInfoPage.this,SetRewardPage.class);

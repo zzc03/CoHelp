@@ -167,12 +167,6 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                 startActivity(intent);
             }
         });
-//        headview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         initImagePicker();
         initWidget();
     }
@@ -199,12 +193,6 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-//        SharedPreferences sharedPreferences=getSharedPreferences("local_user",MODE_PRIVATE);
-//        String user=sharedPreferences.getString("user_id","");
-//        NeedDoingPage.QueryNeedById queryNeedById=new NeedDoingPage.QueryNeedById();
-//        Integer userid=Integer.parseInt(user);
-//        Log.d("初始化","本地获取的的userIDID为"+userid);
-//        queryNeedById.execute(needid,userid);
     }
     @Override
     public void onItemClick(View view, int position) {
@@ -255,8 +243,6 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null){
                     selImageList.addAll(images);
-//                    byte[] bytes=ConvertImage(selImageList.get(0));
-//                    headview.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                     adapter.setImages(selImageList);
                 }
             }
@@ -267,8 +253,6 @@ public class RegisterPage extends AppCompatActivity implements ImagePickerAdapte
                 if (images != null){
                     selImageList.clear();
                     selImageList.addAll(images);
-//                    byte[] bytes=ConvertImage(selImageList.get(0));
-//                    headview.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
                     adapter.setImages(selImageList);
                 }
             }

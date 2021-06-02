@@ -72,12 +72,7 @@ public class NoticePage extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String text) {
-//            needs= JSON.parseArray(text, ItemNeed.class);
-//            NeedListViewAdapter needListViewAdapter=new NeedListViewAdapter(MyPublishNeedPage.this,needs);
-//            listView.setAdapter(needListViewAdapter);
             lists= JSON.parseArray(text,ItemMessage.class);
-//            ResultInfoAdapter adapter=new ResultInfoAdapter(MydoingNeedPage.this,lists);
-//            listView.setAdapter(adapter);
             MessageAdapter adapter=new MessageAdapter(NoticePage.this,lists);
             listView.setAdapter(adapter);
 

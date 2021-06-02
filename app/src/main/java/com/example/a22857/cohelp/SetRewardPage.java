@@ -275,40 +275,6 @@ public class SetRewardPage extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-//                    ve.getContext().startActivity(
-//                            new Intent(ve.getContext(),OtherActivity.class),
-//                            // 注意这里的sharedView
-//                            // Content，View（动画作用view），String（和XML一样）
-//                            ActivityOptions.makeSceneTransitionAnimation((Activity) ve.getContext(),
-//                                    ve,"sharedView").toBundle()
-//                    );
-//                    LayoutInflater inflater=LayoutInflater.from(SetRewardPage.this);
-//                    View imgEntryView=inflater.inflate(R.layout.otheractivity,null);
-//                    final AlertDialog alertDialog=new AlertDialog.Builder(SetRewardPage.this).create();
-//                    alertDialog.setView(largeview);
-//                    alertDialog.show();
-//                    imgEntryView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            alertDialog.cancel();
-//                        }
-//                    });
-
-//                    final AlertDialog alertDialog=new AlertDialog.Builder(SetRewardPage.this).create();
-//                    alertDialog.setContentView(R.layout.otheractivity);
-//                    largeview.setImageBitmap(img);
-//                    alertDialog.setCanceledOnTouchOutside(true);
-//                    Window w=alertDialog.getWindow();
-//                    WindowManager.LayoutParams lp=w.getAttributes();
-//                    lp.x=0;
-//                    lp.y=40;
-//                    alertDialog.onWindowAttributesChanged(lp);
-//                    largeview.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            alertDialog.dismiss();
-//                        }
-//                    });
                 }
             });
         }

@@ -167,14 +167,9 @@ public class PersonPage extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(String text) {
-//            needs= JSON.parseArray(text, ItemNeed.class);
-//            NeedListViewAdapter needListViewAdapter=new NeedListViewAdapter(MyPublishNeedPage.this,needs);
-//            listView.setAdapter(needListViewAdapter);
-            List<ItemMessage> lists= JSON.parseArray(text,ItemMessage.class);
-//            ResultInfoAdapter adapter=new ResultInfoAdapter(MydoingNeedPage.this,lists);
-//            listView.setAdapter(adapter);
-            messnumview.setText(lists.size()+"");
 
+            List<ItemMessage> lists= JSON.parseArray(text,ItemMessage.class);
+            messnumview.setText(lists.size()+"");
         }
     }
 }

@@ -147,11 +147,10 @@ public class MyPublicNeedDoingInfoPage extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {}
         @Override
         protected void onPostExecute(String text) {
-           // Gson gson=new Gson();
-           // List<ItemResult> a=gson.fromJson(text,new TypeToken<List<ItemResult>>() {}.getType());
+
             List<ItemResult> a= JSON.parseArray(text, ItemResult.class);
             Log.d("----result","接受到的need为"+a);
-//            Log.d("----result","接受到的need为"+results);
+
             results=a;
             ResultListviewAdapter adapter=new ResultListviewAdapter(MyPublicNeedDoingInfoPage.this,a);
             resultview.setAdapter(adapter);

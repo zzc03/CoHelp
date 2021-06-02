@@ -56,9 +56,6 @@ public class MydoingNeedPage extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String text) {
-//            needs= JSON.parseArray(text, ItemNeed.class);
-//            NeedListViewAdapter needListViewAdapter=new NeedListViewAdapter(MyPublishNeedPage.this,needs);
-//            listView.setAdapter(needListViewAdapter);
             List<ItemResult> lists=JSON.parseArray(text,ItemResult.class);
             ResultInfoAdapter adapter=new ResultInfoAdapter(MydoingNeedPage.this,lists);
             listView.setAdapter(adapter);

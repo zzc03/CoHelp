@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         password=(EditText)findViewById(R.id.mainPassword);
         signin=(Button)findViewById(R.id.mainSignin);
         register=(Button)findViewById(R.id.mainRegister);
-        //change=(TextView)findViewById(R.id.mainChange);
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-//                    QueryAllBack queryAllBack = new QueryAllBack();
-//                    queryAllBack.execute();
                     final Interface inter = new Interface();
                     new Thread(new Runnable() {
                         @Override
@@ -141,13 +139,6 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         if (responseData.equals("true")){
                             Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(MainActivity.this,Mainpage.class);
-//                            SharedPreferences sharedPreferences=getSharedPreferences("state",MODE_PRIVATE);
-//                            SharedPreferences.Editor editor=sharedPreferences.edit();
-//                            editor.putBoolean("is_login",true);
-//                            editor.putString("userId",account);
-//                            editor.commit();
-//                            startActivityForResult(intent,0);
                         }else{
                             Toast.makeText(MainActivity.this,"账号密码错误",Toast.LENGTH_SHORT).show();
                             return;
@@ -159,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //String result = data.getExtras().getString("result");//得到新Activity 关闭后返回的数据
+
         account.setText("");
         password.setText("");
     }
